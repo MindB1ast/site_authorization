@@ -51,7 +51,7 @@ git checkout branch_name
 
 ### Клонирования проекта
 ```
-https://github.com/MuratovER/IMO
+https://github.com/MuratovER/Proces_Nikita
 ```
 
 ### Проверка наличия Python
