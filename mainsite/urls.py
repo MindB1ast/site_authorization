@@ -10,5 +10,5 @@ urlpatterns = [
     path('course/<int:pk>/', views.course_detail, name='course_detail'),
     path('course/element/<int:pk>/', views.element_detail, name='element_detail'),
     path('course/create/', views.course_creation, name='course_creation'),
-    path('element_creation/<int:pk>/', views.element_creation, name='element_creation')
+    path('element/creation/<int:pk>/', views.element_creation, name='element_creation')
 ]

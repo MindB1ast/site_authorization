@@ -7,7 +7,7 @@ from mainsite.models import Course, CourseElement
 class AdditionalUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password2', 'password1']
+        fields = ['username','first_name', 'last_name' ,'email', 'password2', 'password1']
 
 
 class ElementCreationForm(forms.ModelForm):

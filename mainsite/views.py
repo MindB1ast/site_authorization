@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import random
 from mainsite.models import Course, CourseElement
+from loguru import logger
+
 
 def registration_page(request):
     form = AdditionalUserForm()
@@ -23,7 +25,9 @@ def login_page(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
+        logger.debug(email)
+        user = User.objects.get(email=email)
+        user = authenticate(request, username=user.username, password=password)
         if user:
             login(request, user)
             return redirect('home_page')
@@ -63,12 +67,17 @@ def course_detail(request, pk):
 def element_creation(request, pk):
     course = get_object_or_404(Course, pk=pk)
     form = ElementCreationForm()
-    if request.method == "POST":
+    if request.method == 'POST':
         form = ElementCreationForm(request.POST)
-        print(form)
         if form.is_valid():
             form.save()
-        return redirect('course_detail')
+            element = CourseElement.objects.get(
+                    name=request.POST.get('name'),
+                    text=request.POST.get('text')
+                )
+            element.course = course
+            element.save()
+            return redirect('course_detail',pk)
 
     context = {
         'form':form

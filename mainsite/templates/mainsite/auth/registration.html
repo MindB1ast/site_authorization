@@ -1,9 +1,27 @@
 {% extends 'mainsite/base.html' %} {% block content %} {% load static %}
 <div class="registration_page">
-    <form method="POST" action="">
+    <form method="POST" action="" class="registration_page_form">
         {% csrf_token %}
+        <div class="username_label">
+            {{form.first_name.label}}
+        </div>
+        <div class="username_label">
+            {{form.first_name}}
+        </div>
+        <div class="username_field">
+            {{form.last_name.label}}
+        </div>
+        <div class="username_label">
+            {{form.last_name}}
+        </div>
+        <div class="username_field">
+            Отчество
+        </div>
+        <div class="username_label">
+            {{form.username}}
+        </div>
         <div class="email_label form_field">
-            <p>Email</p>
+            {{form.email.label}}
         </div>
         <div class="Email_field form_field">
             {{form.email}}
@@ -24,7 +42,7 @@
             <p>Войти</p> 
         </a>
         <div class="registration_btn">
-            <input  type="submit" name="Create User" value="Зарегистрироваться">
+            <input  type="submit" value="Зарегистрироваться">
         </div>
     </form>
     
