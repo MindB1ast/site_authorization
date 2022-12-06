@@ -1,12 +1,32 @@
 {% extends 'mainsite/base.html' %} {% block content %} {% load static %}
 
+<div class="element_creation_container">
+    <div class="element_header_h3">
+        <h3>Создать элемент курса</h3>
+    </div>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="element_form">
+            <div class="element_form_header">
+                <p>Название элемента</p>
+                {{form.name}}
+            </div>
 
-<h1>Element creatin</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Оформить заказ" class="creation_order_btn">
-</form>
+            <div class="element_form_text">
+                {{form.text}}
+            </div>
+            <input type="submit" value="Cоздать элемент" class="creation_order_btn">
+
+            
+
+        </div>
+
+        
+    </form>
+</div>
+
+
 
 
 

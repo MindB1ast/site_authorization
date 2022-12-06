@@ -1,6 +1,5 @@
 {% extends 'mainsite/base.html' %} {% block content %} {% load static %}
 <div class="login_page">
-<p>Чтобы продолжить вам нужно авторизоваться</p>
 <form method='POST' action='' class="test">
     {% csrf_token %}
     <div class="login_field">
@@ -11,12 +10,13 @@
         <p>Пароль</p>
         <input type='text' name="password">
     </div>
-    <a href="{% url 'registration' %}">
-        <p>Регистрация</p>
-    </a>
     <div class="login_btn">
         <input type="submit" value="Войти">
     </div>
+    <a href="{% url 'registration' %}">
+        <p>Регистрация</p>
+    </a>
+
 </form>
 </div>
 {% endblock %}

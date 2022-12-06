@@ -10,30 +10,36 @@ from loguru import logger
 
 
 def registration_page(request):
-    form = AdditionalUserForm()
+    if request.user.is_authenticated:
+        return redirect('home_page')
+    else:
+        form = AdditionalUserForm()
 
-    if request.method == 'POST':
-        form = AdditionalUserForm(request.POST) 
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    context = {'form':form}
-    return render(request, 'mainsite/auth/registration.html', context)
+        if request.method == 'POST':
+            form = AdditionalUserForm(request.POST) 
+            if form.is_valid():
+                form.save()
+                return redirect('login')
+        context = {'form':form}
+        return render(request, 'mainsite/auth/registration.html', context)
 
 
 def login_page(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        logger.debug(email)
-        user = User.objects.get(email=email)
-        user = authenticate(request, username=user.username, password=password)
-        if user:
-            login(request, user)
-            return redirect('home_page')
+    if request.user.is_authenticated:
+        return redirect('home_page')
+    else:    
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            logger.debug(email)
+            user = User.objects.get(email=email)
+            user = authenticate(request, username=user.username, password=password)
+            if user:
+                login(request, user)
+                return redirect('home_page')
 
-    context = {}
-    return render(request, 'mainsite/auth/login.html', context)
+        context = {}
+        return render(request, 'mainsite/auth/login.html', context)
 
 
 def logoutUser(request):
@@ -52,6 +58,7 @@ def home_page(request):
     return render(request, 'mainsite/home_page.html', context)
 
 
+@login_required
 def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
     user =  User.objects.get(id=request.user.id)
@@ -64,6 +71,7 @@ def course_detail(request, pk):
     return render(request, 'mainsite/courses_detail.html', context)
 
 
+@login_required
 def element_creation(request, pk):
     course = get_object_or_404(Course, pk=pk)
     form = ElementCreationForm()
@@ -85,13 +93,15 @@ def element_creation(request, pk):
 
     return render(request, 'mainsite/element_creation.html', context)
 
+
+@login_required
 def element_detail(request, pk):
     element = get_object_or_404(CourseElement, pk=pk)
     context = {'element': element}
     return render(request, 'mainsite/element_detail.html', context)
 
 
-
+@login_required
 def course_creation(request):
     users = User.objects.all()
     if request.method == "POST":

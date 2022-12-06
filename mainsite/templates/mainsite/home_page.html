@@ -1,20 +1,24 @@
 {% extends 'mainsite/base.html' %} {% block content %} {% load static %}
-<h1>Home_page</h1>
 
-{% if user.is_staff %}
-<a href="{% url 'course_creation' %}" >   
-    <p>Create</p>
-</a>
-{% endif %}
-{% for course in courses %}
-
-    <div class="job_btn">
-        <a href="{% url 'course_detail' pk=course.pk %}" >   
-            <p>{{course.name}}</p>
+<div class="course_container">
+    <div class="course">
+        {% if user.is_staff %}
+        <div class="course_creation_btn">
+            <a href="{% url 'course_creation' %}" >   
+                <p>Создать курс( только если админ)</p>
+            </a>
+        </div>
+        {% endif %}
+        <div class="course_list">
+            <p>Список курсов</p>
+        </div>
+        {% for course in courses %}
+        <a href="{% url 'course_detail' pk=course.pk %}" > 
+            <div class="course_btn">
+                    <p>{{course.name}}</p>
+            </div>
         </a>
+        {% endfor %}
     </div>
-{% endfor %}
-
-
-
+</div>
 {% endblock %}

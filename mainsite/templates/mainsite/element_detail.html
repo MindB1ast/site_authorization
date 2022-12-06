@@ -1,7 +1,17 @@
 {% extends 'mainsite/base.html' %} {% block content %} {% load static %}
-<h1>Element details</h1>
 
-{{ element.name}}
-{{  element.text}}
+
+
+<div class="element_container">
+    <div class="element_detail">
+        <div class="element_header">
+            {{ element.name}}
+        </div>
+        <div class="element_text">
+            {{  element.text}}
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
