@@ -1,4 +1,20 @@
 {% extends 'mainsite/base.html' %} {% block content %} {% load static %}
 <h1>Home_page</h1>
 
+{% if user.is_staff %}
+<a href="{% url 'course_creation' %}" >   
+    <p>Create</p>
+</a>
+{% endif %}
+{% for course in courses %}
+
+    <div class="job_btn">
+        <a href="{% url 'course_detail' pk=course.pk %}" >   
+            <p>{{course.name}}</p>
+        </a>
+    </div>
+{% endfor %}
+
+
+
 {% endblock %}

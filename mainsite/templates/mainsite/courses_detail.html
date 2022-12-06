@@ -1,0 +1,20 @@
+{% extends 'mainsite/base.html' %} {% block content %} {% load static %}
+<h1>Course details</h1>
+
+{% if user.is_staff %}
+        <a href="{% url 'element_creation' pk=course.pk %}" >   
+            <p>Staff</p>
+        </a>
+{% endif %}
+
+{% for element in elements %}
+    <div class="element_btn">
+        <a href="{% url 'element_detail' pk=element.pk %}" >   
+            <p>{{element.name}}</p>
+        </a>
+    </div>
+{% endfor %}
+
+
+
+{% endblock %}

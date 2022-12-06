@@ -1,0 +1,24 @@
+{% extends 'mainsite/base.html' %} {% block content %} {% load static %}
+<h1>Course creation</h1>
+
+
+<div class="creation_order_page">
+    <form method="POST">
+        {% csrf_token %}
+        <h3>Выбор автомобиля</h3>
+        <input type="text" name="name" value="name" >
+        <div class="creation_order_job_list">
+            {% for user in users%}
+                <div class="creation_order_page_job">
+                    <input type="checkbox" name="{{user.email}}" value="{{user.id}}"> 
+                    <p>{{user.email}}</p>
+                    
+                </div>
+            {%endfor%}
+        </div>
+        <input type="submit" value="Оформить заказ" class="creation_order_btn">
+    </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'mainsite/base.html' %} {% block content %} {% load static %}
+<div class="login_page">
+<p>Чтобы продолжить вам нужно авторизоваться</p>
+<form method='POST' action='' class="test">
+    <div class="login_field">
+        <p>Email</p>
+        <input type='text' name="email">
+    </div>
+    <div class="password_field">
+        <p>Пароль</p>
+        <input type='text' name="password">
+    </div>
+    <a href="{% url 'registration' %}">
+        <p>Регистрация</p>
+    </a>
+    <div class="login_btn">
+        <input type="submit" value="Войти">
+    </div>
+</form>
+</div>
+{% endblock %}

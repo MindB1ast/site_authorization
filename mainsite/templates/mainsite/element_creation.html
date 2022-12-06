@@ -1,0 +1,13 @@
+{% extends 'mainsite/base.html' %} {% block content %} {% load static %}
+
+
+<h1>Element creatin</h1>
+<form action="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Оформить заказ" class="creation_order_btn">
+</form>
+
+
+
+{% endblock %}
